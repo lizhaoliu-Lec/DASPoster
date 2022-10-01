@@ -1,0 +1,302 @@
+\documentclass[landscape,a0paper,fontscale=0.292]{baposter}
+
+\usepackage[vlined]{algorithm2e}
+\usepackage{times}
+\usepackage{calc}
+\usepackage{url}
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false,urlcolor = blue,]{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{enumitem}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\graphicspath{{images/}}
+
+\setlist[itemize]{leftmargin=*,nosep}
+ \setlength{\columnsep}{0.7em}
+ \setlength{\columnseprule}{0mm}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Save space in lists. Use this after the opening of the list
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newcommand{\compresslist}{%
+ \setlength{\itemsep}{0pt}%
+ \setlength{\parskip}{0pt}%
+ \setlength{\parsep}{0pt}%
+ }
+\renewcommand{\rmdefault}{ptm} % Arial
+\renewcommand{\sfdefault}{ptm} % Arial
+
+\include{def}
+
+\newcommand{\name}{Densely-Anchored Sampling\xspace}
+\newcommand{\shortname}{DAS\xspace}
+\newcommand{\lowername}{densely-anchored sampling\xspace}
+
+\newcommand{\bfs}{Discriminative Feature Scaling\xspace}
+\newcommand{\shortbfs}{DFS\xspace}
+
+\newcommand{\tmb}{Memorized Transformation Shifting\xspace}
+\newcommand{\shorttmb}{MTS\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here starts the poster
+%%---------------------------------------------------------------------------
+%% Format it to your taste with the options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{poster}{
+ % Show grid to help with alignment
+ grid=false,
+ columns=5,
+ % Column spacing
+ colspacing=0.7em,
+ % Color style
+ headerColorOne=cyan!20!white!90!black,
+ borderColor=cyan!30!white!90!black,
+ % Format of textbox
+ textborder=faded,
+ % Format of text header
+ headerborder=open,
+ headershape=roundedright,
+ headershade=plain,
+ background=none,
+ bgColorOne=cyan!10!white,
+ headerheight=0.12\textheight}
+ % Eye Catcher
+ {
+      \includegraphics[width=0.08\linewidth]{images/SCUT_logo.jpg}
+      \makebox[0.01\textwidth]{}
+      % \raisebox{0.08\height}
+      {\includegraphics[width=0.08\linewidth]{images/PCL_logo.jpg}}
+      \makebox[0.04\textwidth]{} 
+ }
+ % Title
+ {\sc\huge\bf \name for Deep Metric Learning}
+ % Authors
+ % {\vspace{0.3em} Lizhao Liu$^{1,2}$, Shangxin Huang$^1$, Zhuangwei Zhuang$^1$, Ran Yang$^1$, Mingkui Tan$^{1,3\dag}$, and Yaowei Wang$^{2\dag}$ \\[0.2em]
+ % {$^1$South China University of Technology $^2$PengCheng Laboratory \\ $^3$Key Laboratory of Big Data and Intelligent Robot, Ministry of Education \\[0.2em] ($\dag$ indicates the corresponding author)}}
+  {\vspace{0.3em} Lizhao Liu$^{1,2}$, Shangxin Huang$^1$, Zhuangwei Zhuang$^1$, Ran Yang$^1$, Mingkui Tan$^{1,3}$, and Yaowei Wang$^{2}$ \\[0.2em]
+ {$^1$South China University of Technology $^2$PengCheng Laboratory \\ $^3$Key Laboratory of Big Data and Intelligent Robot, Ministry of Education \\[0.2em]}}
+ %{\texttt{\{gychen, khan, kykwong\}@cs.hku.hk}}}
+ % University logo
+ {
+  \begin{tabular}{r}
+    \makebox[0.01\textwidth]{}
+    % \includegraphics[width=0.12\linewidth]{images/ECCV_logo.png}
+    % \includegraphics[width=0.12\linewidth]{images/eccv-logo-big-black.png}
+    \includegraphics[width=0.12\linewidth]{images/ECCV-logo3.png}
+  \end{tabular}
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position 
+%%% towards an already declared box. So if you have a box attached to the 
+%%% bottom, one to the top and a third one which should be inbetween, you 
+%%% have to specify the top and bottom boxes before you specify the middle 
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Problem Definition and Contribution}{name=contribution,column=0,row=0,span=2}{
+   \textbf{\color{blue}Goal:} To train a deep model that projects semantically similar data into nearby embedding space, Deep Metric Learning (DML) methods often highly depends on sampling effective data from the embedding space.
+    
+    \vspace{0.2em}
+    \textbf{\color{blue}Key Contributions:} A PnP \name (\shortname) scheme for DML that
+    \begin{itemize}
+      \item exploits embeddings’ nearby embedding space and densely produces embeddings.
+      \item includes two models, namely \bfs (\shortbfs) and \tmb (\shorttmb). 
+      \item consistently improves existing DML baselines without bells and whistles.
+    \end{itemize}  
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Experiments \& Results}{name=results,column=2,row=0,span=3}{
+    \textbf{\color{blue}Dataset:}
+
+    \vspace{0.5em}
+    \begin{minipage}{\linewidth}
+        We use three popular benchmarks:
+        \begin{itemize}
+            \item CUB2011-200 (CUB), a fine-grained bird dataset, \#Train~/~\#Test classes: 100~/~100.
+            \item CARS196 (CARS), a fine-grained vehicle dataset, \#Train~/~\#Test classes: 98~/~98.
+            \item Stanford Online Products (SOP), a large-scale online products dataset, \#Train~/~\#Test classes: 11,318~/~11,316.
+        \end{itemize}
+    \end{minipage}
+
+   \vspace{1.0em}
+    \begin{minipage}{0.44\linewidth}
+        \centering
+        \textbf{\color{blue}Improvements over Pair-based Methods:}
+
+        \vspace{0.2em}
+        \input{figures/pair}
+    \end{minipage}
+    % \hdashline
+    \begin{minipage}{0.52\linewidth}
+        \centering
+        \textbf{\color{blue}Comparison with State-of-The-Arts:}
+
+        \vspace{0.2em}
+        \input{figures/sota}
+    \end{minipage}
+
+    \vspace{1.0em}
+    \begin{minipage}{.66\linewidth}
+        \centering
+        \textbf{\color{blue}Experiments on Different Batch Size:}
+
+        \vspace{0.2em}
+        \includegraphics[width=.24\textwidth]{images/BS_R1.pdf}
+        \includegraphics[width=.24\textwidth]{images/BS_R2.pdf}
+        \includegraphics[width=.24\textwidth]{images/BS_R4.pdf}
+        \includegraphics[width=.24\textwidth]{images/BS_R8.pdf}
+        % \subcaption{Experiments using different batch size.}
+    \end{minipage}
+    \begin{minipage}[t]{0.33\linewidth}
+        \vspace{-4.3em}
+        \centering
+        \textbf{\color{blue}Evolution of Training Process:}
+
+        \vspace{0.2em}
+        \includegraphics[width=.48\linewidth]{images/TripletD_loss.pdf}
+        \includegraphics[width=.48\linewidth]{images/TripletD_recall1.pdf}
+    \end{minipage}
+
+    \vspace{0.5em}
+    \centering
+    \textbf{\color{blue}Image Retrieval Results:}
+
+    \centering
+    \vspace{0.2em}
+    \includegraphics[width=.9\linewidth]{images/cars_sop_compare.pdf}
+        
+    \vspace{-1.0em}
+    \begin{flushleft}
+    \begin{minipage}[t]{0.5\linewidth}
+        % \centering
+        % \textbf{\color{blue}Ablation studies:}
+
+        % \vspace{0.3em}
+        % \input{figures/ablation_studies}
+        \centering
+        \textbf{\color{blue}Comparisons with Proxy-based Approaches:}
+
+        \vspace{0.3em}
+        \input{figures/proxy}
+    \end{minipage}
+    \end{flushleft}
+    
+    \begin{flushright}
+    \vspace{-8.0em}
+        \begin{minipage}{0.53\linewidth}
+        \begin{flushright}
+            \small
+            \textbf{More details:} \url{https://github.com/lizhaoliu-Lec/DAS} \\ 
+            \textbf{Contact:} \url{{selizhaoliu, sevtars}@mail.scut.edu.cn}
+        \end{flushright}
+        \end{minipage}
+        \begin{minipage}{0.06\linewidth}
+            \begin{center}
+                \includegraphics[width=\linewidth]{images/DAS-code.png}
+            \end{center}
+        \end{minipage}
+        
+        \begin{minipage}{0.45\linewidth}
+             \includegraphics[width=\linewidth]{images/eccv-landscape.png}
+        \end{minipage}
+    \end{flushright}
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Problem Formulation}{name=formulation,column=0,row=0,below=contribution,span=2}{
+    \begin{minipage}[t]{0.48\linewidth}
+    
+    \vspace{-8.5em}
+    \textbf{\color{blue}Motivations:} 
+     \begin{itemize}
+        \item The basic hypothesis of metric learning: Embeddings close to each other in the embedding space have similar semantics.
+        \item The missing embedding issue: The embedding space often has a barren area due to the absence of data points.
+     \end{itemize}
+      
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\linewidth}
+    \begin{center}
+        % \vspace{-0.8em}
+        \centering\includegraphics[width=\linewidth]{images/motivationV8.pdf}
+    \end{center}
+    % \vspace{0.2em}
+    \end{minipage}
+    
+    \textbf{\color{blue}Main Idea:} Considering the embeddings $\bv$ with data points as anchor points, we alter anchor points semantics by semantic scaling and shifting to produce embedding $\bv'$:
+    \vspace{-0.5em} 
+    \begin{equation}
+        \bv' = \operatorname{\shortname}(\bv;~\bs, \bb) = \underbrace{\bs~\odot~\bv}_\emph{scaling}\underbrace{+~~\bb}_\emph{shifting},
+    \vspace{-0.2em} 
+    \end{equation}
+    where $\bs$ and $\bb$ denote the semantic scaling and shifting factors, respectively.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\headerbox{\bf\color{blue} Method}{name=abstract,column=0,below=formulation,span=2}{
+  \shortname comprises two parts, namely a discriminative feature scaling for producing semantic scaling factors, and a memorized transformation for producing semantic shifting factors.
+  \vspace{-0.2em}
+  \begin{center}
+   \includegraphics[width=0.85\textwidth]{images/frameworkV8.pdf}
+  \end{center}
+  \vspace{-0.5em}
+  \begin{minipage}[t]{0.48\linewidth}
+    \textbf{\color{blue}\bfs:}
+    \vspace{-0.5em}
+    \begin{equation}
+        \bs = \bgamma \odot \bM[y_{\bv}] ~+~\mathbf{1}^d \odot (1 - \bM[y_{\bv}]),
+    \end{equation} 
+    \begin{itemize}
+        \vspace{-0.5em}
+        \item $\bs$ is the semantic scaling factor. 
+        \item $\bM \in \mmR^{c \times d}$, a binary mask, records the frequently activated neurons for each class.
+        \item $\bgamma \sim \operatorname{Uniform}[1 - r_s, 1 + r_s]^d$ and $r_s \in (0, 1)$ is a hyper-parameter.
+    \end{itemize}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \textbf{\color{blue}\tmb:}
+    \vspace{-0.5em}
+    \begin{equation}
+        \label{eqn:shifting}
+        \bb = r_b \bt, ~~ \bt \sim \{\bB[y_{\bv}, z]~\mid~z \small{=} {1, 2, \dots, Z}\}.
+    \end{equation}
+    \begin{itemize}
+        \vspace{-0.5em}
+        \item $\bb$ is the semantic shifting factor.
+        \item $\bB$ is the memory bank that records the intra-class transformations according to the FIFO principle.
+        \item $r_b \in (0, +\infty)$ is a hyper-parameter.
+    \end{itemize}
+  \end{minipage}
+
+}
+
+
+\end{poster}
+\end{document}
