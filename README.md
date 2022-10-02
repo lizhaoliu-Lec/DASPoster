@@ -12,6 +12,9 @@ This code stores the LaTex source code for building the poster for DAS (ECCV 202
 
 - Type `Make` to rebuild the poster.
 
+## Contribution
+The presentation materials are prepared by [Lizhao Liu](https://github.com/lizhaoliu-Lec) and [Shangxin Huang](https://github.com/vtars).
+
 ## Reference
 - [Speech2Action: Cross-modal Supervision for Action Recognition (CVPR 2020)](https://github.com/a-nagrani/CVPR2020_Poster)
 - [TOM-Net: Learning Transparent Object Matting from a Single Image (CVPR 2018)](https://github.com/guanyingc/TOM-Net_Poster_LaTex)
